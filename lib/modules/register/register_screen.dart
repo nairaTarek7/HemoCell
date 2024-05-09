@@ -69,7 +69,7 @@ class RegisterScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, top: 10),
                   child: Text(
-                    'Register',
+                    'Registerathion ',
                     style: GoogleFonts.bangers(
                         fontWeight: FontWeight.bold,
                         color: mainColor,

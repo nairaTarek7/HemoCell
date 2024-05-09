@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,16 +19,19 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<MainCubit,DonationStates>(
-      listener: (context,state){},
-      builder: (context,state){
+    return BlocConsumer<MainCubit, DonationStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
         return Container(
           color: Colors.white,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: StreamBuilder(
-              stream: FirebaseFirestore.instance.collection('users').doc(userId).snapshots(),
-              builder: (context,snapshot) {
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(userId)
+                  .snapshots(),
+              builder: (context, snapshot) {
                 var data = snapshot.data?.data();
                 if (!snapshot.hasData) {
                   // Handle the case where data is not available yet.
@@ -42,12 +44,11 @@ class ProfileScreen extends StatelessWidget {
                   // Handle the case where an error occurred.
                   return Text('Error: ${snapshot.error}');
                 }
-                if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
                       child: CircularProgressIndicator(
-                        color: Colors.black,
-                      ));
+                    color: Colors.black,
+                  ));
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
@@ -58,7 +59,8 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 20, top: 20),
-                          child: Text('Profile',
+                          child: Text(
+                            'Profile',
                             style: GoogleFonts.bangers(
                               fontSize: 32,
                               color: mainColor,
@@ -73,24 +75,16 @@ class ProfileScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15),
                             child: Container(
                               clipBehavior: Clip.hardEdge,
-                    
                               height: 160,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                    
                                   borderRadius: BorderRadius.circular(15),
                                   gradient: LinearGradient(
-                                    colors: [
-                    
-                                      Colors.black,
-                                      mainColor
-                                    ],
-                                  )
-                              ),
+                                    colors: [Colors.black, mainColor],
+                                  )),
                               child: Stack(
                                 clipBehavior: Clip.hardEdge,
                                 children: [
-                    
                                   Positioned(
                                     left: 10,
                                     bottom: 5,
@@ -100,10 +94,7 @@ class ProfileScreen extends StatelessWidget {
                                       decoration: const BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
-                                                  'assets/images/logo.png')
-                                          )
-                                      ),
-                    
+                                                  'assets/images/logo.png'))),
                                     ),
                                   ),
                                   Positioned(
@@ -114,7 +105,8 @@ class ProfileScreen extends StatelessWidget {
                                     child: SingleChildScrollView(
                                       physics: const BouncingScrollPhysics(),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             '${data?['name']}',
@@ -124,13 +116,14 @@ class ProfileScreen extends StatelessWidget {
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          const SizedBox(height:0,),
+                                          const SizedBox(
+                                            height: 0,
+                                          ),
                                           Text(
                                             '${data?['email']}',
                                             style: GoogleFonts.lato(
                                               fontSize: 20,
                                               color: Colors.white,
-                    
                                             ),
                                           ),
                                         ],
@@ -149,58 +142,62 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                    
                                 ],
                               ),
                             ),
                           ),
                         ),
-                       Padding(
-                         padding: const EdgeInsets.only(left: 25,right: 20,top: 10,bottom: 20),
-                         child: Container(
-                           height: 100,
-                           width: double.infinity,
-                           decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(15),
-                             gradient: LinearGradient(
-                               colors: [
-                                 Colors.black,
-                                 mainColor,
-                               ]
-                             )
-                           ),
-                           child: Stack(
-                             children: [
-                               Positioned(
-                                 left: 20,
-                                 top: 15,
-                                 child: Text(
-                                   'My donations',
-                                   style: GoogleFonts.lato(
-                                     fontSize:20,
-                                     color:Colors.white,
-                                     fontWeight: FontWeight.bold,
-                                   ),
-                                 ),
-                               ),
-                               Positioned(
-                                 bottom: 5,
-                                 right: 5,
-                                 child: IconButton(
-                                 onPressed: (){
-                                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const MyDonationsScreen()));
-                                 },
-                                     icon: const Icon(Icons.chevron_right,color: Colors.white,size: 32,)
-                                 ),
-                               ),
-                             ],
-                           ),
-                         ),
-                       ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 25, right: 20, top: 10, bottom: 20),
+                          child: Container(
+                            height: 100,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                gradient: LinearGradient(colors: [
+                                  Colors.black,
+                                  mainColor,
+                                ])),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: 20,
+                                  top: 15,
+                                  child: Text(
+                                    'My donations',
+                                    style: GoogleFonts.lato(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 5,
+                                  right: 5,
+                                  child: IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const MyDonationsScreen()));
+                                      },
+                                      icon: const Icon(
+                                        Icons.chevron_right,
+                                        color: Colors.white,
+                                        size: 32,
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         Row(
                           children: [
-                            SizedBox(width: 20,),
-
+                            SizedBox(
+                              width: 20,
+                            ),
                             Expanded(
                               child: Material(
                                 elevation: 5,
@@ -221,15 +218,15 @@ class ProfileScreen extends StatelessWidget {
                                         left: 20,
                                         top: 10,
                                         right: 20,
-                                        bottom: 5,
+                                        bottom: 10,
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'You have donated with us a number of times',
                                               style: GoogleFonts.lato(
-                                                fontSize: 16,
+                                                fontSize: 12,
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
                                               ),
@@ -254,7 +251,9 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 5,),
+                            SizedBox(
+                              width: 5,
+                            ),
                             Expanded(
                               child: Material(
                                 elevation: 5,
@@ -278,12 +277,12 @@ class ProfileScreen extends StatelessWidget {
                                         bottom: 5,
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'We helped you obtain a number of blood bags',
                                               style: GoogleFonts.lato(
-                                                fontSize: 16,
+                                                fontSize: 12,
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
                                               ),
@@ -308,12 +307,14 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(width: 20,),
-
+                            SizedBox(
+                              width: 20,
+                            ),
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 25,right: 20,top: 20),
+                          padding: const EdgeInsets.only(
+                              left: 25, right: 20, top: 20),
                           child: Container(
                             width: double.infinity,
                             height: 70,
@@ -329,29 +330,30 @@ class ProfileScreen extends StatelessWidget {
                                   child: Text(
                                     'Settings',
                                     style: GoogleFonts.lato(
-                                      fontSize:20,
-                                      color:Colors.white,
+                                      fontSize: 20,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-
                                 ),
                                 Positioned(
                                   bottom: 5,
                                   right: 5,
                                   child: IconButton(
-                                      onPressed: (){
-
-                                      }
-                                      ,
-                                      icon: const Icon(Icons.settings,size: 32,color: Colors.white,)),
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.settings,
+                                        size: 32,
+                                        color: Colors.white,
+                                      )),
                                 )
                               ],
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 25,right: 20,top: 20),
+                          padding: const EdgeInsets.only(
+                              left: 25, right: 20, top: 20),
                           child: Container(
                             width: double.infinity,
                             height: 70,
@@ -367,47 +369,49 @@ class ProfileScreen extends StatelessWidget {
                                   child: Text(
                                     'Logout',
                                     style: GoogleFonts.lato(
-                                      fontSize:20,
-                                      color:Colors.white,
+                                      fontSize: 20,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                    
                                 ),
                                 Positioned(
                                   bottom: 5,
                                   right: 5,
                                   child: IconButton(
-                                      onPressed: (){
-                                        CacheHelper.removeData(key: 'userId')?.then((value) async {
+                                      onPressed: () {
+                                        CacheHelper.removeData(key: 'userId')
+                                            ?.then((value) async {
                                           if (value!) {
-                                            await FirebaseAuth.instance.signOut();
+                                            await FirebaseAuth.instance
+                                                .signOut();
                                             userId = null;
                                             Navigator.pushAndRemoveUntil(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) => LoginScreen()),
-                                                    (route) => false);
-                                            MainCubit.get(context).currentIndex=0;
+                                                    builder: (context) =>
+                                                        LoginScreen()),
+                                                (route) => false);
+                                            MainCubit.get(context)
+                                                .currentIndex = 0;
                                           }
                                         });
-                                      }
-                                      ,
-                                      icon: const Icon(Icons.logout,size: 32,color: Colors.red,)),
+                                      },
+                                      icon: const Icon(
+                                        Icons.logout,
+                                        size: 32,
+                                        color: Colors.red,
+                                      )),
                                 )
                               ],
                             ),
                           ),
                         ),
-                    
-                    
                       ],
                     ),
                   );
                 }
-
-              }
-          ),
+              }),
         );
       },
     );

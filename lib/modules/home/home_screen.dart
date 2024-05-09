@@ -210,7 +210,8 @@ class HomeScreen extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 var data = snapshot.data?.docs[index].data();
-                                var usersId = snapshot.data?.docs[index].data()['usersId'];
+                                var usersId = snapshot.data?.docs[index]
+                                    .data()['usersId'];
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Material(
@@ -218,7 +219,7 @@ class HomeScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15),
                                     child: Container(
                                       height: 400,
-                                      width: 350,
+                                      width: 320,
                                       clipBehavior: Clip.none,
                                       decoration: BoxDecoration(
                                           color: Colors.grey.withOpacity(0.30),
@@ -390,48 +391,59 @@ class HomeScreen extends StatelessWidget {
                                                   padding:
                                                       const EdgeInsets.only(
                                                           right: 5, bottom: 10),
-                                                  child:
-                                                  usersId.contains(userId)
-                                                      ?
-                                                  Text(
-                                                    'Tanks for\nyour donate',
-                                                    textAlign: TextAlign.center,
-                                                    style: GoogleFonts.lato(
-                                                      fontWeight:FontWeight.bold,
-                                                      color:mainColor,
-                                                    ),
-                                                  )
-                                                      :
-                                                  Container(
-                                                    height: 30,
-                                                    width: 80,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      color: mainColor,
-                                                    ),
-                                                    child: Center(
-                                                      child: TextButton(
-                                                          onPressed: () {
-                                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>DonateByEventScreen(nameOfEvent: data?['nameOfEvent'],)));
-                                                          },
-                                                          child: FittedBox(
-                                                            child: Text(
-                                                              'Donate',
-                                                              style: GoogleFonts
-                                                                  .lato(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w900,
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                          )),
-                                                    ),
-                                                  ),
+                                                  child: usersId
+                                                          .contains(userId)
+                                                      ? Text(
+                                                          'Tanks for\nyour donate',
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style:
+                                                              GoogleFonts.lato(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: mainColor,
+                                                          ),
+                                                        )
+                                                      : Container(
+                                                          height: 30,
+                                                          width: 80,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15),
+                                                            color: mainColor,
+                                                          ),
+                                                          child: Center(
+                                                            child: TextButton(
+                                                                onPressed: () {
+                                                                  Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) => DonateByEventScreen(
+                                                                                nameOfEvent: data?['nameOfEvent'],
+                                                                              )));
+                                                                },
+                                                                child:
+                                                                    FittedBox(
+                                                                  child: Text(
+                                                                    'Donate',
+                                                                    style:
+                                                                        GoogleFonts
+                                                                            .lato(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w900,
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          12,
+                                                                    ),
+                                                                  ),
+                                                                )),
+                                                          ),
+                                                        ),
                                                 ),
                                               ],
                                             ),

@@ -1,4 +1,3 @@
-
 class DonateByEventModel {
   List<Map<String, dynamic>>? donates;
 
@@ -42,7 +41,7 @@ class DonateByEventModel {
   });
 
   DonateByEventModel.fromJson(Map<dynamic, dynamic> json) {
-    donates = json['votes'];
+    donates = json['donates'];
     // nameOfTeam1 = json['nameOfTeam1'];
     // nameOfTeam2 = json['nameOfTeam2'];
     // scoreOfTeam1 = json['scoreOfTeam1'];
@@ -64,24 +63,8 @@ class DonateByEventModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'votes': donates,
-      // 'nameOfTeam1': nameOfTeam1,
-      // 'nameOfTeam2': nameOfTeam2,
-      // 'scoreOfTeam1': scoreOfTeam1,
-      // 'scoreOfTeam2': scoreOfTeam2,
-      // 'logoOfTeam1': logoOfTeam1,
-      // 'logoOfTeam2': logoOfTeam2,
-      // 'nameOfReferee': nameOfReferee,
-      // 'membersOfVotes': membersOfVotes,
-      // 'rateFiveStar': rateFiveStar,
-      // 'rateFourStar': rateFourStar,
-      // 'rateThreeStar': rateThreeStar,
-      // 'rateTwoStar': rateTwoStar,
-      // 'rateOneStar': rateOneStar,
-      // 'timestampOfBegin': timestampOfBegin,
-      // 'timestampOfEnd': timestampOfEnd,
-      // 'refereeId': refereeId,
-      // 'refereeImage': refereeImage,
+      'donates': donates,
+  
     };
   }
 }
